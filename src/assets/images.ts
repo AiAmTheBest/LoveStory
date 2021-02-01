@@ -13,8 +13,16 @@ const Images = {
             check: require('./icon/ic_check_radio.png'),
             uncheck: require('./icon/ic_uncheck_radio.png'),
         },
+        auThen: {
+            email: require('./icon/ic_email.png'),
+            password: require('./icon/ic_password.png'),
+            noShowPass: require('./icon/no_show_pass.png'),
+            showPass: require('./icon/show_pass.png'),
+        }
     },
-    photo: {},
+    photo: {
+        background: require('./images/img_background.jpg'),
+    },
 };
 
 export default Images;

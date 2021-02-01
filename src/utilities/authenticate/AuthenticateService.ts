@@ -44,11 +44,6 @@ export const useLogin = (options: LoginRequestParams): LoginRequest => {
             const response = await login(options);
             const signInAction = setUserInfo(response?.data);
             store.dispatch(signInAction);
-            const userResponse = await getProfile();
-            AuthenticateService.handlerLogin({
-                ...response,
-                user: userResponse,
-            });
         } catch (e) {
             AlertMessage(e);
             logger(e);

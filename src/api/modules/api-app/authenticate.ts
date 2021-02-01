@@ -1,8 +1,8 @@
 import request from 'api/request';
 
-export const getProfile = () => request.get(`profile`);
+export const getProfile = () => request.get(`api/users`);
 
-export const login = (params: any) => request.post(`auth/login`, params);
+export const login = (params: any) => request.post(`api/users/signin`, params)
 export const register = (params: any) => request.post(`auth/register`, params);
 export const forgotPassword = (email: string) => request.post(`auth/forgot-password`, { email });
 export const checkIsExistEmail = (email: string) => request.post(`auth/check-account-existed`, { email });
