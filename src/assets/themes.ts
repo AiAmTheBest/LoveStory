@@ -3,6 +3,8 @@ const common = {
     transparent: 'transparent',
     black: '#000',
     blue: 'blue',
+    focus: 'green',
+    borderFocus: '#619CED',
     placeHolderGray: 'rgba(216, 216, 216, 0.6)',
     borderInputError: '#ff0000',
 };
@@ -14,6 +16,7 @@ const Light = {
         secondary: '#E9ECEF',
         textPrimary: '#000000',
         textSecondary: '#607d8b',
+        textError: 'red',
     },
     FONTS: {
         defaultFont: 'Montserrat-Regular',

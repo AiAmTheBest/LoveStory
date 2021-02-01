@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, SafeAreaView, ImageBackground } from 'react-native';
-import { StyledButton, StyledInput, StyledText, StyledTouchable } from 'components/base';
+import { StyledButton, StyledInput, StyledInputLabel, StyledText, StyledTouchable } from 'components/base';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import { useLogin } from 'utilities/authenticate/AuthenticateService';
 import { logger } from 'utilities/helper';
@@ -10,18 +10,20 @@ import { navigate } from 'navigation/NavigationService';
 import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
 import request from 'api/request';
 import axios from 'axios';
+import Images from 'assets/images';
+import { validateMail } from 'utilities/format';
 
 const LoginScreen: React.FunctionComponent = () => {
-    const [user, setUser] = useState({ email: 'hoan.nguyen@amela.vn', password: '123123' });
+    const [user, setUser] = useState({ email: 'vdluan01@gmail.com', password: '123123' });
     const passwordRef = useRef<any>(null);
     const { t } = useTranslation();
     const { loading, requestLogin } = useLogin(user);
-    const onChangeEmail = (text: string) => {
-        setUser({ ...user, email: text });
+
+    const handleChange = (field: string, text: string) => {
+        setUser({ ...user, [field]: text });
     };
-    const onChangePassword = (text: string) => {
-        setUser({ ...user, password: text });
-    };
+
+    const { email, password } = user;
     const doRegister = () => {
         navigate(AUTHENTICATE_ROUTE.REGISTER);
     };
@@ -29,16 +31,30 @@ const LoginScreen: React.FunctionComponent = () => {
         navigate(AUTHENTICATE_ROUTE.FORGOTPASS);
     };
 
-    // useEffect(() => {
-    //     test();
-    // }, []);
+    const [errors, setError] = useState({
+        emailF: '',
+        passwordF: '',
+    });
+    const { emailF, passwordF } = errors;
+    const [disable, setDisable] = useState(true);
 
-    // const test = async () => {
-    //     const data = await request.get('api/products');
-    //     const test = await axios.get('http://192.168.8.163:5000/api/products');
-    //     console.log('data', data);
-    //     console.log('test: ', test);
-    // };
+    useEffect(() => {
+        if (email && !validateMail(email)) {
+            setError({ ...errors, emailF: t('email không đúng định dạng'), passwordF: '' });
+            setDisable(true);
+        } else if (password && password.length < 6) {
+            setError({ ...errors, passwordF: t('mật khẩu phải lớn hơn 6 ký tự'), emailF: '' });
+            setDisable(true);
+        } else {
+            setError({ emailF: '', passwordF: '' });
+            setDisable(false);
+            if (email.length > 0 && password.length > 0) {
+                setDisable(false);
+            } else {
+                setDisable(true);
+            }
+        }
+    }, [email, password]);
 
     return (
         <KeyboardAwareScrollView
@@ -46,28 +62,28 @@ const LoginScreen: React.FunctionComponent = () => {
             enableOnAndroid={true}
             showsVerticalScrollIndicator={false}
         >
-            <ImageBackground
-                source={{
-                    uri: 'https://img1.kienthucvui.vn/uploads/2019/10/27/hinh-nen-dien-thoai-sieu-dep_111222232.jpg',
-                }}
-                style={styles.image}
-            >
+            <ImageBackground source={Images.photo.background} style={styles.image}>
                 <SafeAreaView style={styles.body}>
-                    <StyledInput
-                        value={user.email}
-                        onChangeText={onChangeEmail}
-                        placeholder={t('login.placeholderEmail')}
-                        keyboardType="email-address"
-                        returnKeyType={'next'}
+                    <StyledInputLabel
+                        icon={Images.icons.auThen.email}
+                        label="Email"
+                        value={email}
+                        onChangeText={(value: string) => handleChange('email', value)}
+                        errorMessage={emailF}
                         onSubmitEditing={() => passwordRef.current.focus()}
+                        returnKeyType={'next'}
+                        keyboardType="email-address"
                     />
-                    <StyledInput
-                        value={user.password}
-                        onChangeText={onChangePassword}
-                        placeholder={t('login.placeholderPassword')}
+                    <StyledInputLabel
+                        icon={Images.icons.auThen.password}
+                        label="Password"
+                        value={password}
+                        onChangeText={(value: string) => handleChange('password', value)}
+                        isPassword={true}
+                        errorMessage={passwordF}
+                        maxLength={32}
                         ref={passwordRef}
                         secureTextEntry={true}
-                        maxLength={32}
                     />
                     <StyledButton onPress={requestLogin} title={'Log in'} customStyle={styles.loginButton} />
                     <StyledTouchable onPress={goToForgotPassword} customStyle={styles.registerButton}>
@@ -86,7 +102,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    body: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    body: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 30,
+    },
     loginButton: {
         marginTop: 20,
     },

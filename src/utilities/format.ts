@@ -8,3 +8,11 @@ export const changeLocale = (locale: string): void => {
 export const toLocalStringTime = (date: Date): string => {
     return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
 };
+
+export const validateMail = (text: string) => {
+    const reg = /^(\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+)$/;
+    if (reg.test(text)) {
+        return true;
+    }
+    return false;
+};

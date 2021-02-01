@@ -99,7 +99,7 @@ export const useSocket = (id?: string) => {
                 avatar:
                     listStaff?.find(
                         (staff: any) => Number(`2${staff?.staffId}`) === Number(`${item?.memberType}${item?.memberId}`),
-                    )?.photo?.[0] || Images.icons?.avatar,
+                    )?.photo?.[0] || Images.icons.back,
                 name:
                     listStaff?.find(
                         (staff: any) => Number(`2${staff?.staffId}`) === Number(`${item?.memberType}${item?.memberId}`),
