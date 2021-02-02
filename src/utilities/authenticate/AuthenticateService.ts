@@ -44,6 +44,9 @@ export const useLogin = (options: LoginRequestParams): LoginRequest => {
             const response = await login(options);
             const signInAction = setUserInfo(response?.data);
             store.dispatch(signInAction);
+            AuthenticateService.handlerLogin({
+                ...response,
+            });
         } catch (e) {
             AlertMessage(e);
             logger(e);
