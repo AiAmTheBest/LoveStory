@@ -14,8 +14,9 @@ export default {
     },
     tab: {
         home: 'Home',
-        notification: 'Notification',
-        setting: 'Setting',
+        search: 'Search',
+        myStory: 'My Story',
+        profile: 'Profile',
     },
     alert: {
         button: {
