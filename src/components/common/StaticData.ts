@@ -4,7 +4,7 @@ export const ListStory = [
         status: true,
         like: 30,
         comment: 100,
-        title: 'Chu Tich gia vo lam cong nhan'
+        title: 'Chu Tich gia vo lam cong nhan Chu Tich gia vo lam cong nhan'
     },
     {
         image: 'https://wallpaperaccess.com/full/459246.jpg',

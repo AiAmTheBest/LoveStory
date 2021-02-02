@@ -12,7 +12,7 @@ interface StoryProps {
     onPress?(): void;
 }
 
-const ItemStory = (props: StoryProps) => {
+const ItemStoryNew = (props: StoryProps) => {
     const { image = '', status = false, like = 0, comment = 0, title = '' } = props?.item;
     return (
         <StyledTouchable onPress={props?.onPress} customStyle={styles.container}>
@@ -28,42 +28,28 @@ const ItemStory = (props: StoryProps) => {
                         <StyledText customStyle={styles.txtFinish} i18nText={'hoàn thành'} />
                     </View>
                 )}
-            </StyledImage>
-            <View style={{ flex: 1, marginHorizontal: 10, marginBottom: 5 }}>
                 <View style={styles.containerLike}>
-                    <StyledIcon customStyle={styles.iconComment} source={Images.icons.heart} size={scale(15)} />
+                    <StyledIcon customStyle={styles.iconComment} source={Images.icons.heart} size={scale(8)} />
                     <StyledText customStyle={styles.txtLike} i18nText={like} />
-                    <StyledIcon
-                        customStyle={[styles.iconComment, { marginLeft: 7 }]}
-                        source={Images.icons.comment}
-                        size={scale(15)}
-                    />
+                    <StyledIcon customStyle={styles.iconComment} source={Images.icons.comment} size={scale(8)} />
                     <StyledText customStyle={styles.txtLike} i18nText={comment} />
                 </View>
-                <StyledText numberOfLines={2} customStyle={styles.title} i18nText={title} />
-                <StyledText customStyle={styles.text} i18nText={title} />
-            </View>
+            </StyledImage>
+            <StyledText numberOfLines={2} customStyle={styles.title} i18nText={title} />
         </StyledTouchable>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        marginRight: 10,
-        marginLeft: 25,
-        marginVertical: 5,
-        flex: 1,
-        borderWidth: 0.2,
-
-        borderRadius: 15,
+        width: scale(90),
+        margin: 10,
     },
     image: {
-        width: scale(90),
+        width: '100%',
         height: scale(140),
         borderRadius: 15,
         borderWidth: 0.1,
-        margin: 2,
     },
     containerTextFinish: {
         backgroundColor: Themes.COLORS.ScreamGreen,
@@ -79,26 +65,25 @@ const styles = StyleSheet.create({
         color: Themes.COLORS.white,
     },
     containerLike: {
-        paddingVertical: 5,
+        paddingBottom: 5,
+        marginTop: 'auto',
         flexDirection: 'row',
+        alignItems: 'center',
     },
     txtLike: {
         paddingLeft: 3,
-        fontSize: 16,
+        fontSize: 9,
         color: 'orange',
     },
     iconComment: {
+        marginLeft: 7,
         tintColor: 'red',
     },
     title: {
         fontSize: 12,
-        paddingVertical: 5,
-        fontWeight: 'bold',
-    },
-    text: {
-        fontSize: 12,
+        textAlign: 'center',
         paddingVertical: 5,
     },
 });
 
-export default ItemStory;
+export default ItemStoryNew;

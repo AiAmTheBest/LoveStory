@@ -5,6 +5,7 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { StyledText } from 'components/base';
 import { Themes } from 'assets/themes';
 import Size from 'assets/sizes';
+import { isIos } from 'utilities/helper';
 
 const StyledTabBar: React.FunctionComponent<BottomTabBarProps> = ({
     state,
@@ -48,7 +49,7 @@ const StyledTabBar: React.FunctionComponent<BottomTabBarProps> = ({
                         style={[
                             styles.tabButton,
                             {
-                                backgroundColor: isFocused ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.25)',
+                                backgroundColor: isFocused ? 'rgba(0, 0, 0, 0.25)' : 'rgba(0, 0, 0, 0.75)',
                             },
                         ]}
                     >
@@ -66,23 +67,30 @@ const StyledTabBar: React.FunctionComponent<BottomTabBarProps> = ({
 const styles = StyleSheet.create({
     tabContainer: {
         flexDirection: 'row',
-        marginBottom: Platform.OS === 'ios' ? Metrics.safeBottomPadding : 0,
-        borderTopColor: '#DEE2E6',
+        paddingBottom: isIos ? Metrics.safeBottomPadding : 0,
         justifyContent: 'space-between',
         alignItems: 'center',
+        backgroundColor: Themes.COLORS.white,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingHorizontal: 10,
     },
     tabButton: {
+        flex: 1,
+        marginTop: 5,
+        paddingVertical: 10,
         marginHorizontal: 5,
-        paddingVertical: 7,
-        paddingHorizontal: 5,
-        borderRadius: 50,
+        borderRadius: 20,
         alignItems: 'center',
+        justifyContent: 'center',
+        minWidth: 55,
     },
     tabIcon: {
         width: 17,
         height: 17,
         resizeMode: 'contain',
         tintColor: Themes.COLORS.white,
+        marginVertical: 2,
     },
     tabLabel: {
         color: Themes.COLORS.white,
