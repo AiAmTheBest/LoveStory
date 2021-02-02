@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import StyledText from 'components/base/StyledText';
 import { StyledButton } from 'components/base';
+import StyledText from 'components/base/StyledText';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 
-const SettingView: React.FunctionComponent = () => {
+const ProfileView = () => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <StyledText originValue={'Setting'} />
@@ -12,4 +12,7 @@ const SettingView: React.FunctionComponent = () => {
         </View>
     );
 };
-export default SettingView;
+
+const styles = StyleSheet.create({});
+
+export default ProfileView;

@@ -17,6 +17,7 @@ const Light = {
         textPrimary: '#000000',
         textSecondary: '#607d8b',
         textError: 'red',
+        ScreamGreen: '#66ff99',
     },
     FONTS: {
         defaultFont: 'Montserrat-Regular',

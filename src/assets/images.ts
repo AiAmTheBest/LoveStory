@@ -4,6 +4,8 @@ const Images = {
     icons: {
         selected: require('./icon/ic_select.png'),
         back: require('./icon/ic_back.png'),
+        heart: require('./icon/ic_heart.png'),
+        comment: require('./icon/ic_comment.png'),
         tab: {
             home: require('./icon/ic_home.png'),
             notification: require('./icon/ic_notification.png'),
